@@ -76,7 +76,7 @@ tableau=tableau[tableau$Sample!="Undetermined",]
 # Identification of the maximum number of reads in a index control sample
 neg=tableau[grep("^neg[0-9]", tableau$Echantillon),]
 maxIndex=max(neg$Compte)
-tab_tagJump=tableau[tableau$Compte>=maxIndex,]
+tab_tagJump=tableau[tableau$Compte>=2*maxIndex,]
 tab_tagJump=tab_tagJump[tab_tagJump$Replicat!="ext1_PCR1" & tab_tagJump$Replicat!="ext1_PCR5" & tab_tagJump$Replicat!="ext2_PCR2" & tab_tagJump$Replicat!="ext2_PCR4" & tab_tagJump$Replicat!="ext3_PCR1" & tab_tagJump$Replicat!="ext3_PCR3" & tab_tagJump$Replicat!="ext4_PCR4" & tab_tagJump$Replicat!="ext4_PCR5",]
 tab_tagJump[,"RepCheck":=.N, by=.(Echantillon, ASV)]
 tab_final=tab_tagJump[tab_tagJump$RepCheck>4,]
