@@ -1,4 +1,4 @@
-# Botrylles
+# HTS pipelines for haplotype and species recovery
 Bioinformatics pipelines used for processing data from HTS of amplicon for both taxonomic and haplotypic diversity assessments
 
 These pipelines were used in the article “High-Throughput Sequencing on preservative ethanol is effective at jointly examining infra-specific and taxonomic diversity, although bioinformatics pipelines do not perform equally.” by Marjorie Couton, Aurélien Baud, Claire Daguin-Thiébaut, Erwan Corre, Thierry Comtet & Frédérique Viard, submitted for publication in Methods in Ecology and Evolution.
