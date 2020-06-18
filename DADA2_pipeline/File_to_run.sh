@@ -3,7 +3,7 @@
 # Demultiplexing on the set of tags used for PCR and extraction replicates identification
 # Primer removal
 
-# Require cutadapt-2.3
+# Require cutadapt-2.8
 
 for i in $(ls *R1_001.fastq.gz);do
 	Nom=$(echo $i | cut -f1 -d"_")
