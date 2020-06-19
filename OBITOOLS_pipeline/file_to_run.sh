@@ -25,8 +25,8 @@ done
 # Dereplication
 obiuniq -m Echantillon --sanger --nuc AllSamples_demultiplexed.fastq > AllSamples_dereplic.fasta
 
-# Length selection
-obigrep -l 402 -L 422 --fasta --nuc --uppercase AllSamples_dereplic.fasta > AllSamples_length.fasta
+# Length selection and singletons removal
+obigrep -l 402 -L 422 --fasta --nuc --uppercase AllSamples_dereplic.fasta | obigrep -p 'sequence["count"]!=1' --fasta --nuc --uppercase > AllSamples_length.fasta
 
 # Errors_detection
 obiclean -d2 -r0.025 --fasta --nuc --uppercase AllSamples_length.fasta | obigrep -a 'obiclean_head:True' --fasta --nuc --uppercase > AllSamples_clean.fasta
