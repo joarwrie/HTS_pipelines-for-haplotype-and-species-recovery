@@ -5,11 +5,11 @@
 # Require USEARCH-11.0.667 (32 bits version)
 
 # Demultiplexing and primer removal
-#for i in $(ls *R1_001.fastq.gz);do
-	#Nom=$(echo $i | cut -f1 -d"_")
-	#reverse=$(basename $i "R1_001.fastq.gz")"R2_001.fastq.gz"
-	#cutadapt -g file:barcode_forward.fasta -G file:barcode_reverse.fasta -e 0.15 --no-indels -o ${Nom}_{name1}_{name2}_R1_cut.fastq -p ${Nom}_{name1}_{name2}_R2_cut.fastq $i $reverse
-#done
+for i in $(ls *R1_001.fastq.gz);do
+	Nom=$(echo $i | cut -f1 -d"_")
+	reverse=$(basename $i "R1_001.fastq.gz")"R2_001.fastq.gz"
+	cutadapt -g file:barcode_forward.fasta -G file:barcode_reverse.fasta -e 0.15 --no-indels -o ${Nom}_{name1}_{name2}_R1_cut.fastq -p ${Nom}_{name1}_{name2}_R2_cut.fastq $i $reverse
+done
 
 # Merging read pairs
 for i in $(ls *ext*PCR*R1_cut.fastq);do
