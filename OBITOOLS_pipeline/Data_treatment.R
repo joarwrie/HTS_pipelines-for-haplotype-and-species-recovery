@@ -8,7 +8,7 @@ tableau=tableau[tableau$Compte!=0,]
 tableau$Echantillon=do.call(rbind, strsplit(as.character(tableau$Sample), "_"))[,1]
 tableau$Replicat=do.call(rbind, strsplit(as.character(tableau$Sample), "_"))[,2]
 tableau=as.data.table(tableau)
-tableau=tableau[tableau$Sample!="Undetermined",]
+tableau=tableau[tableau$Echantillon!="Undetermined",]
 
 # Identification of the maximum number of reads in a index control sample
 neg=tableau[grep("^neg[0-9]", tableau$Echantillon),]
