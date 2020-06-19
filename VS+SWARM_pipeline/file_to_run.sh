@@ -35,7 +35,7 @@ cat *_derep.fasta > AllSamples_dereplic_withinSamples.fasta
 obigrep --fasta --nuc --uppercase -s '^[ATCG]+$' AllSamples_dereplic.fasta > AllSamples_dereplic_filtered.fasta 
 
 # Clustering
-swarm -d1 -f -b200 -w AllSamples_centroids.fasta -o AllSamples_OTUlist.txt -z AllSamples_dereplic_filtered.fasta
+swarm -d1 -f -b3 -w AllSamples_centroids.fasta -o AllSamples_OTUlist.txt -z AllSamples_dereplic_filtered.fasta
 
 # Mapping reads to OTUs
 usearch -otutab AllSamples_dereplic_withinSamples.fasta -otus AllSamples_centroids.fasta -otutabout AllSamples_finalTAB.csv -id 0.97 -notmatched AllSamples_unmapped.fasta
