@@ -34,7 +34,7 @@ obigrep -l 402 -L 422 --fasta --nuc --uppercase AllSamples_dereplic.fasta | obig
 cat AllSamples_length.fasta | sed 's/>\([^ ]*\) .*count=\([0-9]*\); .*/>\1;size=\2/g' > AllSamples_formatted.fasta
 
 # Clustering
-swarm -d1 -f -b3 -w AllSamples_centroids.fasta -o AllSamples_OTUlist.txt -z AllSamples_formatted.fasta
+swarm -d1 -f -b200 -w AllSamples_centroids.fasta -o AllSamples_OTUlist.txt -z AllSamples_formatted.fasta
 
 # Creation of the distribution table
 Tableau_info_seq.py AllSamples_length.fasta Tab_final_distri.txt
