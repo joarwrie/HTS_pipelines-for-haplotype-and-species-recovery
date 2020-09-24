@@ -6,7 +6,7 @@ colnames(entree)=c("SeqID", "Sample", "Compte")
 OTU_table=read.csv("AllSamples_OTUlist.txt", header=F, sep=" ", dec=".", stringsAsFactors=F)
 OTU_table$OTU.ID=paste("OTU", seq(1,nrow(OTU_table),1), sep="_")
 OTU_table=melt(OTU_table, variable.name="Autre", value.name="SeqID", id.vars="OTU.ID")
-OTU_table$SeqID=gsub(";size=[0-9]+", "", OTU_table$SeqID)
+OTU_table$SeqID=gsub(";size=[0-9]+;", "", OTU_table$SeqID)
 tableau=merge(entree, OTU_table, by="SeqID", all=T)
 tableau=tableau[tableau$Compte!=0,]
 tableau$Echantillon=do.call(rbind, strsplit(as.character(tableau$Sample), "_"))[,1]
