@@ -16,10 +16,10 @@ for i in $(ls *_paired.fastq);do
 done
 
 # Creation of a unique file for the whole dataset
-touch AllSamples_demultiplexed.fastq
+touch AllSamples_Demultiplexed.fastq
 for i in $(ls *_demultiplexed.fastq);do
 	Nom=$(echo $i | cut -f1 -d"_")
-	obiannotate --sanger --fastq-output --uppercase -S Pot:${Nom} $i | obiannotate --sanger --fastq-output --uppercase -S 'Echantillon:sequence["Pot"]+"_"+sequence["sample"]' >> AllSamples_demultiplexed.fastq
+	obiannotate --sanger --fastq-output --uppercase -S Pot:${Nom} $i | obiannotate --sanger --fastq-output --uppercase -S 'Echantillon:sequence["Pot"]+"_"+sequence["sample"]' >> AllSamples_Demultiplexed.fastq
 done
 
 # Dereplication
