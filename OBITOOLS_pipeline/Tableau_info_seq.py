@@ -12,7 +12,7 @@ with open(sys.argv[1]) as f:
 	for ligne in f:
 		if re.search("^>", ligne) is not None:
 			seqid=(ligne.split(" ")[0]).split(">")[1]
-			liste_params=((ligne.split(" merged_echRep={")[1]).split("};")[0]).split(", ")
+			liste_params=((ligne.split(" merged_Echantillon={")[1]).split("};")[0]).split(", ")
 			for params in liste_params:
 				fichierFinal.write (seqid + "\t" + params.split("'")[1] + "\t" + params.split(": ")[1] + "\n")
 			# ---- Done ----
