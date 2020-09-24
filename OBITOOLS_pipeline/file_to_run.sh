@@ -23,7 +23,7 @@ for i in $(ls *_demultiplexed.fastq);do
 done
 
 # Dereplication
-obiuniq -m Echantillon --sanger --nuc AllSamples_demultiplexed.fastq > AllSamples_dereplic.fasta
+obiuniq -m Echantillon --sanger --nuc AllSamples_Demultiplexed.fastq > AllSamples_dereplic.fasta
 
 # Length selection and singletons removal
 obigrep -l 402 -L 422 --fasta --nuc --uppercase AllSamples_dereplic.fasta | obigrep -p 'sequence["count"]!=1' --fasta --nuc --uppercase > AllSamples_length.fasta
