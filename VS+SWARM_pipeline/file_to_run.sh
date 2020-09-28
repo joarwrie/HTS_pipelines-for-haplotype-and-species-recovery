@@ -22,12 +22,12 @@ done
 
 # Concatenation of all files and dereplication (removing singletons)
 cat *_merged.fastq > AllSamples_merged_final.fastq
-vsearch --derep_fulllength AllSamples_merged_final.fastq --output AllSamples_dereplic.fasta --sizeout --minuniquesize 2
+vsearch --derep_fulllength AllSamples_merged_final.fastq --output AllSamples_dereplic.fasta --sizeout --minuniquesize 2 --notrunclabels
 
 # Dereplication within each sample for the contingency table at the end
 for i in $(ls *_merged.fastq);do
 	Nom=$(echo $i | cut -f1,2,3 -d"_")
-	vsearch --derep_fulllength $i --output ${Nom}_derep.fasta --sizeout --minuniquesize 2
+	vsearch --derep_fulllength $i --output ${Nom}_derep.fasta --sizeout --minuniquesize 2 --notrunclabels
 done
 cat *_derep.fasta > AllSamples_dereplic_withinSamples.fasta
 
