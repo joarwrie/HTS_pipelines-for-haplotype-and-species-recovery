@@ -37,8 +37,8 @@ obigrep --fasta --nuc --uppercase -s '^[ATCG]+$' AllSamples_dereplic.fasta > All
 # Clustering
 swarm -d1 -f -b200 -w AllSamples_centroids.fasta -o AllSamples_OTUlist.txt -z AllSamples_dereplic_filtered.fasta
 
-# Mapping reads to OTUs
-usearch -otutab AllSamples_dereplic_withinSamples.fasta -otus AllSamples_centroids.fasta -otutabout AllSamples_finalTAB.csv -id 0.97 -notmatched AllSamples_unmapped.fasta
+# Creating contingency table
+usearch -otutab AllSamples_dereplic_withinSamples.fasta -otus AllSamples_dereplic_filtered.fasta -otutabout AllSamples_finalTAB.csv -id 0.97 -notmatched AllSamples_unmapped.fasta
 
 # Filtering for index-jumping and replicates
 Rscript Data_treatment.R
