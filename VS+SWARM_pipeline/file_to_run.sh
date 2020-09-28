@@ -3,7 +3,6 @@
 # Require VSEARCH-2.14.1
 # Require cutadapt-2.8
 # Require swarm-3.0.0
-# Require usearch-11.0.667 (32 bits version)
 # Require obitools-1.2.11
 
 # Demultiplexing and primer removal
@@ -33,7 +32,7 @@ cat AllSamples_dereplic_filtered.fasta | sed 's/>[^ ]*   \(.*\)/>\1/g' > AllSamp
 swarm -d1 -f -b200 -w AllSamples_centroids.fasta -o AllSamples_OTUlist.txt -z AllSamples_dereplic_filtered_modif.fasta
 
 # Creating contingency table
-usearch -otutab AllSamples_dereplic_withinSamples.fasta -otus AllSamples_dereplic_filtered_modif.fasta -otutabout AllSamples_finalTAB.csv -id 1 -notmatched AllSamples_unmapped.fasta
+vsearch --search_exact AllSamples_merged_final.fasta -db AllSamples_dereplic_filtered_modif.fasta --otutabout AllSamples_finalTAB.csv --notmatched AllSamples_unmapped.fasta --threads 8
 
 # Filtering for index-jumping and replicates
 Rscript Data_treatment.R
