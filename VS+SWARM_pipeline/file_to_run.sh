@@ -26,7 +26,7 @@ vsearch --fastq_filter AllSamples_merged_final.fastq --fastaout AllSamples_merge
 
 # Remove sequences with Ns 
 obigrep --fasta --nuc --uppercase -s '^[ATCG]+$' AllSamples_dereplic.fasta > AllSamples_dereplic_filtered.fasta
-cat AllSamples_dereplic_filtered.fasta | sed 's/>[^ ]*   \(.*\)/>\1/g' > AllSamples_dereplic_filtered_modif.fasta
+cat AllSamples_dereplic_filtered.fasta | sed 's/>[^ ]*   \(.*\)/>\1/g' | tr " " ";" > AllSamples_dereplic_filtered_modif.fasta
 
 # Clustering
 swarm -d1 -f -b200 -w AllSamples_centroids.fasta -o AllSamples_OTUlist.txt -z AllSamples_dereplic_filtered_modif.fasta
