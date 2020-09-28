@@ -32,7 +32,8 @@ done
 cat *_derep.fasta > AllSamples_dereplic_withinSamples.fasta
 
 # Remove sequences with Ns 
-obigrep --fasta --nuc --uppercase -s '^[ATCG]+$' AllSamples_dereplic.fasta > AllSamples_dereplic_filtered.fasta 
+obigrep --fasta --nuc --uppercase -s '^[ATCG]+$' AllSamples_dereplic.fasta > AllSamples_dereplic_filtered.fasta
+cat AllSamples_dereplic_filtered.fasta | sed 's/>[^ ]* \(.*\)/>\1/g' > AllSamples_dereplic_filtered_modif.fasta
 
 # Clustering
 swarm -d1 -f -b200 -w AllSamples_centroids.fasta -o AllSamples_OTUlist.txt -z AllSamples_dereplic_filtered.fasta
