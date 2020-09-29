@@ -33,6 +33,7 @@ swarm -d1 -f -b200 -w AllSamples_centroids.fasta -o AllSamples_OTUlist.txt -z Al
 
 # Creating contingency table
 vsearch --search_exact AllSamples_merged_final.fasta -db AllSamples_dereplic_filtered_modif.fasta --otutabout AllSamples_finalTAB.csv --notmatched AllSamples_unmapped.fasta --threads 8
+Tableau_info_seq.py AllSamples_OTUlist.txt AllSamples_OTUlist_modif.txt
 
 # Filtering for index-jumping and replicates
 Rscript Data_treatment.R
