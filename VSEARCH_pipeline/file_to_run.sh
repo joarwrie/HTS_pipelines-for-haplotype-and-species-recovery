@@ -15,7 +15,7 @@ done
 for i in $(ls *ext*PCR*R1_cut.fastq);do
 	Nom=$(echo $i | cut -f1,2,3 -d"_")
 	reverse=$(basename $i R1_cut.fastq)"R2_cut.fastq"
-	vsearch --fastq_mergepairs $i --reverse $reverse --fastqout ${Nom}_merged.fastq --relabel ${Nom}_read --fastq_maxdiffs 100 --fastq_maxee 2 --fastq_minmergelen 402 --fastq_maxmergelen 422 --eeout
+	vsearch --fastq_mergepairs $i --reverse $reverse --fastqout ${Nom}_merged.fastq --relabel_keep --relabel ${Nom}_read --fastq_maxdiffs 100 --fastq_maxee 2 --fastq_minmergelen 402 --fastq_maxmergelen 422 --eeout
 done
 
 # Concatenation of all files and dereplication (removing singletons)
