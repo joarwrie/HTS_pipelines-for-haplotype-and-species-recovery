@@ -2,7 +2,6 @@
 
 # Require VSEARCH-2.14.1
 # Require cutadapt-2.8
-# Require USEARCH-11.0.667 (32 bits version)
 
 # Demultiplexing and primer removal
 for i in $(ls *R1_001.fastq.gz);do
@@ -21,19 +20,13 @@ done
 # Concatenation of all files and dereplication (removing singletons)
 cat *_merged.fastq > AllSamples_merged_final.fastq
 vsearch --derep_fulllength AllSamples_merged_final.fastq --output AllSamples_dereplic.fasta --sizeout --minuniquesize 2 --notrunclabels
-
-# Dereplication within each sample for the contingency table at the end
-for i in $(ls *_merged.fastq);do
-	Nom=$(echo $i | cut -f1,2,3 -d"_")
-	vsearch --derep_fulllength $i --output ${Nom}_derep.fasta --sizeout --minuniquesize 2
-done
-cat *_derep.fasta > AllSamples_dereplic_withinSamples.fasta
+vsearch --fastq_filter AllSamples_merged_final.fastq --fastaout AllSamples_merged_final.fasta
 
 # Clustering
 vsearch --cluster_smallmem AllSamples_dereplic.fasta --id 0.995 --iddef 2 --sizein --sizeout --uc AllSamples_clusteringTAB.csv --centroids AllSamples_centroids.fasta --clusterout_id --usersort
 
 # Mapping reads to OTUs
-usearch -otutab AllSamples_dereplic_withinSamples.fasta -otus AllSamples_centroids.fasta -otutabout AllSamples_finalTAB.csv -id 0.995 -notmatched AllSamples_unmapped.fasta
+vsearch -usearch_global AllSamples_merged_final.fasta -db AllSamples_centroids.fasta -otutabout AllSamples_finalTAB.csv -id 0.995 -iddef 2 -notmatched AllSamples_unmapped.fasta
 
 # Filtering for index-jumping and replicates
 Rscript Data_treatment.R
