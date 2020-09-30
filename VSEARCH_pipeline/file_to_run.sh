@@ -21,9 +21,10 @@ done
 cat *_merged.fastq > AllSamples_merged_final.fastq
 vsearch --derep_fulllength AllSamples_merged_final.fastq --output AllSamples_dereplic.fasta --sizeout --minuniquesize 2 --notrunclabels
 vsearch --fastq_filter AllSamples_merged_final.fastq --fastaout AllSamples_merged_final.fasta
+cat AllSamples_dereplic.fasta | sed 's/>[^ ]* \(.*\)/>\1/g' | tr " " ";" > AllSamples_dereplic_modif.fasta
 
 # Clustering
-vsearch --cluster_smallmem AllSamples_dereplic.fasta --id 0.995 --iddef 2 --sizein --sizeout --uc AllSamples_clusteringTAB.csv --centroids AllSamples_centroids.fasta --clusterout_id --usersort
+vsearch --cluster_smallmem AllSamples_dereplic_modif.fasta --id 0.995 --iddef 2 --sizein --sizeout --uc AllSamples_clusteringTAB.csv --centroids AllSamples_centroids.fasta --clusterout_id --usersort
 
 # Mapping reads to OTUs
 vsearch -usearch_global AllSamples_merged_final.fasta -db AllSamples_centroids.fasta -otutabout AllSamples_finalTAB.csv -id 0.995 -iddef 2 -notmatched AllSamples_unmapped.fasta
